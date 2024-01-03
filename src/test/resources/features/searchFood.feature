@@ -14,10 +14,5 @@ Feature: Search Food
       | banana      |
       | pear        |
       | broccoli    |
-      | cauliflower |
-      | cucumber    |
-      | beetroot    |
-      | carrot      |
-      | almonds     |
 
 

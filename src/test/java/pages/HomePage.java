@@ -1,6 +1,10 @@
 package pages;
 
+import io.cucumber.java.After;
+import io.cucumber.java.AfterAll;
+import io.cucumber.java.BeforeAll;
 import lombok.SneakyThrows;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,11 +26,11 @@ public class HomePage {
     WebElement searchButton;
 
 
+    @BeforeAll
     @SneakyThrows
     public void openURL() {
         System.out.println("Website is launching");
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
-        System.out.println("Website is launched");
         Thread.sleep(1000);
 
     }
@@ -38,6 +42,7 @@ public class HomePage {
     }
 
     public void typeFoodName(String foodNameText){
+        searchBox.clear();
         searchBox.sendKeys(foodNameText);
     }
 
@@ -45,7 +50,20 @@ public class HomePage {
         searchButton.click();
     }
 
+    @SneakyThrows
+    public String getActualFoodName(String foodName) {
+        Thread.sleep(2000);
+        WebElement actualProductName = driver.findElement(By.className("product-name"));
+        String actualFoodName = actualProductName.getText().toLowerCase().trim();
+        System.out.println(actualFoodName);
+        return actualFoodName;
+    }
 
 
+    @AfterAll
+    public void tearDown() {
+        System.out.println("Close the browser window");
+        driver.quit();
+    }
 
 }

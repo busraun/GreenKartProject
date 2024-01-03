@@ -1,6 +1,7 @@
 package utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.jupiter.api.AfterAll;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -21,7 +22,6 @@ public class Driver {
         }
         return driver;
     }
-
     public static void closeDriver() {
         if (driver != null) {
             driver.quit();

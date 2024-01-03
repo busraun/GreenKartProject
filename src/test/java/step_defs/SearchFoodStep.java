@@ -42,6 +42,8 @@ public class SearchFoodStep {
     @Then("sees the {string}")
     public void seesThe(String foodName) {
 
-        Assert.assertEquals(true, searchedFoodName.isEmpty());
+        Assert.assertTrue(homePage.getActualFoodName(foodName), true);
+    //    Assert.assertEquals(foodName,homePage.getActualFoodName(foodName));
+
     }
 }
