@@ -19,11 +19,13 @@ public class SearchFoodStep {
 
     @Given("user navigates home page")
     public void userNavigatesHomePage() {
+
         homePage.openURL();
     }
 
     @When("clicks search box")
     public void clicksSearchBox() {
+
         homePage.clickSearchBox();
     }
 
@@ -43,7 +45,6 @@ public class SearchFoodStep {
     public void seesThe(String foodName) {
 
         Assert.assertTrue(homePage.getActualFoodName(foodName), true);
-    //    Assert.assertEquals(foodName,homePage.getActualFoodName(foodName));
 
     }
 }

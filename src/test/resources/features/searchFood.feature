@@ -10,9 +10,9 @@ Feature: Search Food
     Then sees the "<foodName>"
 
     Examples:
-      | foodName    |
-      | banana      |
-      | pear        |
-      | broccoli    |
+      | foodName |
+      | banana   |
+      | pear     |
+      | beans    |
 
 

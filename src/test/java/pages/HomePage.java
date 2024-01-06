@@ -4,6 +4,7 @@ import io.cucumber.java.After;
 import io.cucumber.java.AfterAll;
 import io.cucumber.java.BeforeAll;
 import lombok.SneakyThrows;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -25,14 +26,26 @@ public class HomePage {
     @FindBy(className = "search-button")
     WebElement searchButton;
 
+    @FindBy(className = "quantity")
+    WebElement quantityBox;
+
+    @FindBy(xpath = "//button[text()='ADD TO CART']")
+    WebElement addToCartButton;
+
+    @FindBy(xpath = "//img[@alt='Cart']")
+    WebElement cartButton;
+
+    @FindBy(xpath = "//button[text()='PROCEED TO CHECKOUT']")
+    public WebElement proceedToCheckoutButton;
+
 
     @BeforeAll
     @SneakyThrows
     public void openURL() {
         System.out.println("Website is launching");
         driver.get("https://rahulshettyacademy.com/seleniumPractise/#/");
+        driver.manage().window().maximize();
         Thread.sleep(1000);
-
     }
 
     @SneakyThrows
@@ -46,8 +59,29 @@ public class HomePage {
         searchBox.sendKeys(foodNameText);
     }
 
+    @SneakyThrows
+    public void typeFoodNameandQuantity(String foodNameText, String quantityText){
+        searchBox.clear();
+        searchBox.sendKeys(foodNameText);
+        Thread.sleep(3000);
+        quantityBox.clear();
+        Thread.sleep(2000);
+        quantityBox.sendKeys(quantityText);
+    }
+
     public void clickSearchButton(){
+
         searchButton.click();
+    }
+
+    @SneakyThrows
+    public void clickAddToCartButton(){
+        Thread.sleep(3000);
+        addToCartButton.click();
+    }
+
+    public void goToCart(){
+        cartButton.click();
     }
 
     @SneakyThrows
@@ -55,7 +89,6 @@ public class HomePage {
         Thread.sleep(2000);
         WebElement actualProductName = driver.findElement(By.className("product-name"));
         String actualFoodName = actualProductName.getText().toLowerCase().trim();
-        System.out.println(actualFoodName);
         return actualFoodName;
     }
 
@@ -66,4 +99,11 @@ public class HomePage {
         driver.quit();
     }
 
+    @SneakyThrows
+    public void verifyHomePage() {
+        Thread.sleep(7000);
+        String currentUrl= driver.getCurrentUrl();
+        String expectedUrl= "https://rahulshettyacademy.com/seleniumPractise/#/";
+        Assert.assertEquals(expectedUrl,currentUrl);
+    }
 }
